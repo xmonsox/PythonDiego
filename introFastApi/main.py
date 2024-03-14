@@ -1,9 +1,22 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
+#invocamos esa session
+from db.session import get_session
+from sqlalchemy.orm import Session
+from models.Users import User
+
 
 #Libreria para validar datos, poderosisisisisima
 from pydantic import BaseModel
 #crear onjeto de fastapi
 app = FastAPI()
+
+
+
+@app.post("/test")
+async def test_db(db: Session = Depends(get_session)):
+    result = db.query(User).all
+    return {"result": result}
+    
 
 #valida los tipos
 class Numero(BaseModel):
