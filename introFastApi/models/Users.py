@@ -1,20 +1,20 @@
-import datetime
-from enum import Enum
-from sqlalchemy import Column, String, Boolean, TIMESTAP, datetime
-from sqlalchemy.orm import relationships
+from datetime import datetime
+from sqlalchemy import Column, String, Boolean, TIMESTAMP, DateTime
+from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import UUID
-import uuid
+# from db.session import Base
 
-class User ():
+class User():
     __tablename__ = 'users'
-    
-    user_id = Column(String(100), primary_key=true)
+    # __table_args__ = {'schema': 'public'}  # Especifica el esquema de la tabla
+
+    user_id = Column(String(100), primary_key=True)
     full_name = Column(String(100))
     mail = Column(String(100), unique=True)
     passhash = Column(String(100))
     user_role = Column(String(100))
     user_status = Column(Boolean, default=True)
-    created_at = Column(TIMESTAP, default=datetime.utcnow)
-    updated_at = Column(DATETIME, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = Column(TIMESTAMP, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
-    transactions = relationships("Transaction", back_populates="user  ")
+    transactions = relationship("Transaction", back_populates="user")

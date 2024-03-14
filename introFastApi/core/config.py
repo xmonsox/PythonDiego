@@ -26,6 +26,6 @@ class Settings:
     SECRET_KEY: str = os.getenv("SECRET_KEY")
     TOKEN_EXPIRE_MIN = 960 #IN MINS
     #es para el algoritmo de encriptacion que vamos a usar esra en .env
-    ALGORITHM: os.getenv("ALGORITHM")
+    ALGORITHM: os.getenv("ALGORITHM", "valor_predeterminado") # type: ignore
 
-    settings = Settings()
+settings = Settings()
